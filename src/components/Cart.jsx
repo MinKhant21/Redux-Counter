@@ -1,31 +1,18 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { increase } from '../features/cart/cartSlice'
+import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 export default function Cart() {
     const items = useSelector(state => state.cartSlice.items)
-    const [productList , setProductList] = useState([])
-    useEffect(() => {
-        axios.get('https://api.escuelajs.co/api/v1/products')
-            .then(res => {
-               items.map((items) => {
-                    return res.data.filter((list) => {
-                        if (list.id == items) {
-                        return setProductList(list)
-                    }
-                 })
-            
-                
-            })
-        })
-    }, [setProductList,items])
-    console.log(productList)
+    const dispatch = useDispatch()
   return (
         <div className='container'>
           <table className='table table-striped'>
               <thead>
               <tr className='table'>
-                    <th>ID</th>
                     <th>Image</th>
                     <th>Title</th>
                     <th>Description</th>
@@ -34,26 +21,34 @@ export default function Cart() {
               </tr>
             </thead>
               <tbody>
-              
-              <tr>
-                  <td>1</td>
-                  <td>
-                      <img src="" alt="produc" />
-                  </td>
-                  <td>
-                      hello
-                  </td>
-                  <td>
-                      hello
-                  </td>
-                  <td>
-                      1000
-                  </td>
-                  <th>
-                      <a href="" className='btn btn-sm btn-success'>Order</a>
-                      <a href="" className='btn btn-sm btn-danger'>Cancel</a>
-                  </th>
-              </tr>
+                  {
+                      items.map(item => {
+                          return (
+                            <tr key={item.id}>
+                                <td>
+                                    <img src={item.images} className='img-thumbnail' style={{width:"100px",height:'100px'}} alt="produc" />
+                                </td>
+                                <td>
+                                    {item.title}
+                                </td>
+                                <td>
+                                    {item.description}
+                                </td>
+                                <td>
+                                    {item.price} Ks
+                                </td>
+                                <th>
+                                    <a href="" className='btn btn-sm btn-success'>Order</a>
+                                    <Button  className='btn btn-sm btn-danger' onClick={()=>dispatch(increase({
+                                        type: 'REMOVE_CART',
+                                        data:items
+                                    }))}>Cancel</Button>
+                                </th>
+                            </tr>
+                          )
+                      })
+                }
+            
               </tbody>
             </table>
         </div>

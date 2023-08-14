@@ -10,7 +10,7 @@ export default function NavBar() {
     <div>
       <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
-              <Link className="navbar-brand btn btn-sm btn-primary" to='/cart'>Cart { count}</Link>
+              <Link className="navbar-brand badge rounded-pill text-bg-primary" to='/cart'>Cart { count}</Link>
         <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
             <button className="btn btn-outline-success" type="submit">Search</button>

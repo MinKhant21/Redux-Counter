@@ -26,7 +26,7 @@ export default function Products() {
                               <p className="card-text">{product.description}</p>
                                   <a className="btn btn-primary" onClick={() => dispatch(increase({
                                       type: "ADD_TO_CART",
-                                      data:product.id,
+                                      data:product,
                                 }))}>Add To Cart</a>
                           </div>
                       </div>

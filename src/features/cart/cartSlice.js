@@ -14,6 +14,14 @@ const cartSlice = createSlice({
                     state.value += 1
                     state.items.push(actions.payload.data)
                     break;
+                case "REMOVE_CART":
+                    state.value -= 1
+                    state.items.filter(item => {
+                        if (item.id != actions.payload.data.id) {
+                            console.log(item)
+                        }
+                    })
+                    break;
                 default:
                     break;
             }
