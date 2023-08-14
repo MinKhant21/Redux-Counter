@@ -9,6 +9,7 @@ export default function App() {
     <div>
       {counter}
       
+      
       <button type="button" className="btn btn-default" onClick={()=>dispatch(increase())}>add</button>
       <button type="button" className="btn btn-default" onClick={()=>dispatch(decrease())}>add</button>
       
